@@ -1,0 +1,54 @@
+#' Load Mapping text file into a GRanges Object
+#'
+#' This function reads a text file containing transcript IDs and protein domain information with genomic coordinates,
+#' and loads the data into a `GRanges` object from the `GenomicRanges` package using regex.
+#'
+#' @param file_path A string specifying the path to the mapping file.
+#'
+#' @return A GRanges object containing the genomic ranges of the protein domains with transcript IDs as metadata.
+#' @importFrom GenomicRanges GRanges
+#' @importFrom IRanges IRanges
+#' @importFrom S4Vectors DataFrame
+#' @examples
+#' # Example usage:
+#' # Load and test the GRanges object
+#' gr <- load_transcript_domains("./data/mapping.txt")
+#' @export
+blessy.load_transcript_domains <- function(file_path) {
+    # Read the data
+    data <- read.table(file_path)
+    colnames(data) <- c("TranscriptID", "DomainInfo")
+    
+    # Parse the domain info using a more flexible regex
+    matches <- regmatches(data$DomainInfo, regexec("(.*)::(chr[^:]+):(\\d+)-(\\d+)\\((\\+|-)\\)", data$DomainInfo))
+    
+    # Extract relevant components
+    domain_names <- sapply(matches, function(x) if (length(x) == 6) x[2] else NA)  # Domain name
+    chromosomes <- sapply(matches, function(x) if (length(x) == 6) x[3] else NA)   # Chromosome
+    starts <- sapply(matches, function(x) if (length(x) == 6) x[4] else NA)        # Start position
+    ends <- sapply(matches, function(x) if (length(x) == 6) x[5] else NA)          # End position
+    strands <- sapply(matches, function(x) if (length(x) == 6) x[6] else NA)       # Strand
+    
+    # Identify rows with NAs (indicating unmatched data)
+    na_rows <- is.na(starts) | is.na(ends)
+    
+    # Print or handle rows with unmatched data
+    if (any(na_rows)) {
+        warning("Some rows have unmatched data and will be excluded:")
+        print(data[na_rows, ])
+    }
+    
+    # Remove rows with NAs
+    valid_rows <- !na_rows
+    
+    # Create a GRanges object
+    gr <- GRanges(
+        seqnames = chromosomes[valid_rows],
+        ranges = IRanges(start = as.numeric(starts[valid_rows]), end = as.numeric(ends[valid_rows])),
+        strand = strands[valid_rows],
+        mcols = DataFrame(TranscriptID = data$TranscriptID[valid_rows], Domain = domain_names[valid_rows])
+    )
+    
+    return(gr)
+}
+    
