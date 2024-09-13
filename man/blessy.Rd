@@ -4,27 +4,32 @@
 \alias{blessy}
 \title{Main blessy Function}
 \usage{
-blessy(tx_count_file_path, mapping_file_path)
+blessy(tx_count_file_path, domain_track, transcript_track, genome)
 }
 \arguments{
 \item{tx_count_file_path}{A string specifying the path to the transcript count file.}
 
-\item{mapping_file_path}{A string specifying the path to the domain mapping file.}
+\item{domain_track}{A string specifying the domain track name (e.g., "unipDomain").}
+
+\item{transcript_track}{A string specifying the transcript track name (e.g., "wgEncodeGencodeBasicV44").}
+
+\item{genome}{A string specifying the genome version (e.g., "hg38").}
 }
 \value{
-A list containing two elements: 
+A list containing two elements:
 \describe{
-  \item{doco_count}{The aggregated DoCo count matrix.}
-  \item{final_dict}{The final dictionary data frame with gene, transcript, and DoCo information.}
+\item{doco_count}{The aggregated DoCo count matrix.}
+\item{final_dict}{The final dictionary data frame with gene, transcript, and DoCo information.}
 }
 }
 \description{
-This function serves as the main entry point for the blessy package. It takes file paths for the transcript count data and domain mapping data,
-processes them using a series of functions, and generates the final outputs: a DoCo count matrix and a final dictionary data frame.
+This function serves as the main entry point for the blessy package. It takes file paths for the transcript count data,
+generates domain and transcript mappings, processes them using a series of functions, and generates the final outputs:
+a DoCo count matrix and a final dictionary data frame.
 }
 \examples{
 # Example usage:
-results <- blessy("path/to/transcript_counts.txt", "path/to/domain_mapping.txt")
+results <- blessy("path/to/transcript_counts.txt", "unipDomain", "wgEncodeGencodeBasicV44", "hg38")
 head(results$doco_count)
 head(results$final_dict)
 }

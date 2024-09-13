@@ -1,9 +1,9 @@
-#' Load Mapping text file into a GRanges Object
+#' Load Mapping from SummarizedExperiment into a GRanges Object
 #'
-#' This function reads a text file containing transcript IDs and protein domain information with genomic coordinates,
-#' and loads the data into a `GRanges` object from the `GenomicRanges` package using regex.
+#' This function reads a `SummarizedExperiment` object containing transcript IDs and protein domain information
+#' with genomic coordinates, and loads the data into a `GRanges` object from the `GenomicRanges` package using regex.
 #'
-#' @param file_path A string specifying the path to the mapping file.
+#' @param se A `SummarizedExperiment` object containing transcript and domain information.
 #'
 #' @return A GRanges object containing the genomic ranges of the protein domains with transcript IDs as metadata.
 #' @importFrom GenomicRanges GRanges
@@ -11,16 +11,16 @@
 #' @importFrom S4Vectors DataFrame
 #' @examples
 #' # Example usage:
-#' # Load and test the GRanges object
-#' gr <- load_transcript_domains("./data/mapping.txt")
+#' # Load and test the GRanges object from a SummarizedExperiment
+#' gr <- blessy.load_transcript_domain(se)
 #' @export
-blessy.load_transcript_domains <- function(file_path) {
-    # Read the data
-    data <- read.table(file_path)
-    colnames(data) <- c("TranscriptID", "DomainInfo")
+blessy.load_transcript_domain_mapping <- function(se) {
+    # Extract domain and transcript information from the SummarizedExperiment
+    transcript_ids <- rowData(se)$transcript_id
+    domain_info <- as.vector(assays(se)$domain_info)
     
     # Parse the domain info using a more flexible regex
-    matches <- regmatches(data$DomainInfo, regexec("(.*)::(chr[^:]+):(\\d+)-(\\d+)\\((\\+|-)\\)", data$DomainInfo))
+    matches <- regmatches(domain_info, regexec("(.*)::(chr[^:]+):(\\d+)-(\\d+)\\((\\+|-)\\)", domain_info))
     
     # Extract relevant components
     domain_names <- sapply(matches, function(x) if (length(x) == 6) x[2] else NA)  # Domain name
@@ -35,7 +35,7 @@ blessy.load_transcript_domains <- function(file_path) {
     # Print or handle rows with unmatched data
     if (any(na_rows)) {
         warning("Some rows have unmatched data and will be excluded:")
-        print(data[na_rows, ])
+        print(data.frame(transcript_ids[na_rows], domain_info[na_rows]))
     }
     
     # Remove rows with NAs
@@ -46,9 +46,8 @@ blessy.load_transcript_domains <- function(file_path) {
         seqnames = chromosomes[valid_rows],
         ranges = IRanges(start = as.numeric(starts[valid_rows]), end = as.numeric(ends[valid_rows])),
         strand = strands[valid_rows],
-        mcols = DataFrame(TranscriptID = data$TranscriptID[valid_rows], Domain = domain_names[valid_rows])
+        mcols = DataFrame(TranscriptID = transcript_ids[valid_rows], Domain = domain_names[valid_rows])
     )
     
     return(gr)
 }
-    
