@@ -13,7 +13,7 @@
 #'
 #' @examples
 #' # Example usage:
-#' get_transcript_track("hg38", "wgEncodeGencodeBasicV44")
+#' blessy.get_transcript_track("hg38", "wgEncodeGencodeBasicV44")
 #'
 #' @export
 blessy.get_transcript_track <- function(genome, track) {

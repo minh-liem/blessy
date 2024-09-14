@@ -16,5 +16,5 @@ A SummarizedExperiment object containing the DoCo for each transcript.
 Annotate transcripts with domain combinations (DoCo) using the mapping GRanges object
 }
 \examples{
-#doco_se <- blessy.annotate_tx_with_doco(gr)
+doco_se <- blessy.annotate_tx_with_doco(gr)
 }

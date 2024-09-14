@@ -40,10 +40,10 @@ blessy <- function(tx_count_file_path, domain_track, transcript_track, genome) {
     doco_se <- blessy.annotate_tx_with_doco(gr)
     
     # Step 6: Load transcript count data
-    tx_count_se <- blessy.load_transcript_counts(tx_count_file_path)
+    count_se <- blessy.load_transcript_counts(tx_count_file_path)
     
     # Step 7: Annotate transcript counts with DoCo and gene information
-    final_se <- blessy.annotate_doco_with_gene(tx_count_se, doco_se)
+    final_se <- blessy.annotate_doco_with_gene(count_se, doco_se)
     
     # Step 8: Generate DoCo count matrix
     doco_count <- blessy.generate_doco_count(final_se)

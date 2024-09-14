@@ -2,22 +2,23 @@
 % Please edit documentation in R/blessy-annotate_doco_with_gene.R
 \name{blessy.annotate_doco_with_gene}
 \alias{blessy.annotate_doco_with_gene}
-\title{Annotate the DoCo groups with gene ID associated with each transcript}
+\title{Annotate Transcript Counts with Domain Combinations (DoCo) and Gene Information}
 \usage{
 blessy.annotate_doco_with_gene(count_se, doco_se)
 }
 \arguments{
-\item{count_se}{A SummarizedExperiment object containing transcript counts with gene IDs.}
+\item{count_se}{A \code{SummarizedExperiment} object containing transcript counts with associated transcript IDs and gene IDs.}
 
-\item{doco_se}{A SummarizedExperiment object containing DoCo information based on transcript IDs.}
+\item{doco_se}{A \code{SummarizedExperiment} object containing domain combination information (DoCo) for each transcript.}
 }
 \value{
-A SummarizedExperiment object with transcript count with DoCo fully annotated (with gene IDs)
+A \code{SummarizedExperiment} object with annotated DoCo information.
 }
 \description{
-Annotate the DoCo groups with gene ID associated with each transcript
+This function takes transcript count data and domain combination (DoCo) data,
+and adds the domain combination information to each transcript, along with the associated gene.
 }
 \examples{
 # Example usage:
-# final_se <- annotate_tx_with_doco(count_se, doco_se)
+final_se <- blessy.annotate_doco_with_gene(count_se, doco_se)
 }

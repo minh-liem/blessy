@@ -10,12 +10,12 @@ blessy.load_transcript_counts(file_path)
 \item{file_path}{A string specifying the path to the transcript count file (in \code{.txt} format).}
 }
 \value{
-A \code{SummarizedExperiment} object containing the transcript counts with associated gene IDs.
+A \code{SummarizedExperiment} object containing the transcript counts with associated transcript IDs and gene IDs.
 }
 \description{
 This function reads a transcript count file and loads the data into a \code{SummarizedExperiment} object.
 }
 \examples{
 # Example usage:
-# count_se <- blessy.load_transcript_counts("./data/tx_count.txt")
+count_se <- blessy.load_transcript_counts("./data/tx_count.txt")
 }

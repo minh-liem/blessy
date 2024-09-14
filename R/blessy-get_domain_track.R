@@ -13,7 +13,7 @@
 #'
 #' @examples
 #' # Example usage:
-#' get_domain_track("hg38", "unipDomain")
+#' blessy.get_domain_track("hg38", "unipDomain")
 #'
 #' @export
 blessy.get_domain_track <- function(genome, track) {

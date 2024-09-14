@@ -21,6 +21,6 @@ and saves the result as a CSV file. It also returns a \code{SummarizedExperiment
 }
 \examples{
 # Example usage:
-se <- transcript_domain_mapping("./out/unipDomain_hg38_domain.bed", "./out/wgEncodeGencodeBasicV44_hg38_transcript.bed")
+blessy.transcript_domain_mapping("./out/unipDomain_hg38_domain.bed", "./out/wgEncodeGencodeBasicV44_hg38_transcript.bed")
 
 }

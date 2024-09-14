@@ -9,14 +9,13 @@
 #'
 #' @examples
 #' # Assuming `final_se` is your SummarizedExperiment object
-#' #final_dict <- blessy.generate_final_dict(final_se)
-#' head(final_dict)
+#' final_dict <- blessy.generate_final_dict(final_se)
 #' @export
 blessy.generate_final_dict <- function(final_se) {
     # Extract the relevant data from the SummarizedExperiment object
     gene_ids <- rowData(final_se)$GENEID
-    transcript_ids <- rownames(final_se)
-    doco_vector <- rowData(final_se)$FinalDoCo
+    transcript_ids <- rowData(final_se)$TXNAME
+    doco_vector <- rowData(final_se)$DoCo
     
     # Create the final dictionary data frame
     final_dict <- data.frame(Gene = gene_ids, Transcript = transcript_ids, DoCo = doco_vector)

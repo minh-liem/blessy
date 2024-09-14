@@ -19,6 +19,6 @@ This function fetches transcript track data from the UCSC Genome Browser API and
 }
 \examples{
 # Example usage:
-get_transcript_track("hg38", "wgEncodeGencodeBasicV44")
+blessy.get_transcript_track("hg38", "wgEncodeGencodeBasicV44")
 
 }

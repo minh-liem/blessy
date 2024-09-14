@@ -17,6 +17,5 @@ This function creates a dictionary data frame containing gene, transcript, and D
 }
 \examples{
 # Assuming `final_se` is your SummarizedExperiment object
-#final_dict <- blessy.generate_final_dict(final_se)
-head(final_dict)
+final_dict <- blessy.generate_final_dict(final_se)
 }

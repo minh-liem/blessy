@@ -15,11 +15,23 @@
 blessy.generate_doco_count <- function(final_se) {
     # Extract the count matrix and rowData from the SummarizedExperiment object
     count_matrix <- assays(final_se)$counts
-    doco_vector <- rowData(final_se)$FinalDoCo
+    doco_vector <- rowData(final_se)$DoCo
+    
+    # Ensure that the length of doco_vector matches the number of rows in count_matrix
+    if (nrow(count_matrix) != length(doco_vector)) {
+        stop("Mismatch between the number of rows in the count matrix and the length of the DoCo vector.")
+    }
+    
+    # Convert count_matrix to a data frame for easier manipulation if it's not already a data frame
+    count_matrix_df <- as.data.frame(count_matrix)
+    
+    # Create a data frame combining the DoCo vector and the count matrix
+    combined_df <- cbind(doco = doco_vector, count_matrix_df)
     
     # Aggregate the counts by DoCo
-    doco_count <- aggregate(count_matrix, by = list(doco = doco_vector), FUN = sum)
+    doco_count <- aggregate(. ~ doco, data = combined_df, FUN = sum)
     
     # Return the aggregated DoCo count matrix
     return(doco_count)
 }
+

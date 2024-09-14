@@ -17,7 +17,7 @@
 #'
 #' @examples
 #' # Example usage:
-#' se <- transcript_domain_mapping("./out/unipDomain_hg38_domain.bed", "./out/wgEncodeGencodeBasicV44_hg38_transcript.bed")
+#' blessy.transcript_domain_mapping("./out/unipDomain_hg38_domain.bed", "./out/wgEncodeGencodeBasicV44_hg38_transcript.bed")
 #'
 #' @export
 blessy.transcript_domain_mapping <- function(domain_bed_file, transcript_bed_file) {

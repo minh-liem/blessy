@@ -19,5 +19,5 @@ with genomic coordinates, and loads the data into a \code{GRanges} object from t
 \examples{
 # Example usage:
 # Load and test the GRanges object from a SummarizedExperiment
-gr <- blessy.load_transcript_domain(se)
+gr <- blessy.load_transcript_domain_mapping(se)
 }
