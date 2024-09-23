@@ -12,13 +12,13 @@ blessy.get_transcript_track(genome, track)
 \item{track}{A string specifying the track name (e.g., "wgEncodeGencodeBasicV44").}
 }
 \value{
-A BED file saved in the \code{./out} directory with the transcript track data. The function prints a message confirming the save.
+A BED file saved in the \code{./out} directory with the transcript track data, and the transcript data frame.
 }
 \description{
 This function fetches transcript track data from the UCSC Genome Browser API and saves it as a BED file.
+It also returns the transcript data frame (bed_df).
 }
 \examples{
-# Example usage:
-blessy.get_transcript_track("hg38", "wgEncodeGencodeBasicV44")
+tx_df <- blessy.get_transcript_track("hg38", "wgEncodeGencodeBasicV44")
 
 }

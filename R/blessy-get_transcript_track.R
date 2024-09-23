@@ -19,7 +19,6 @@
 blessy.get_transcript_track <- function(genome, track) {
     # Step 1: Define UCSC Genome Browser API URL using the input parameters
     url <- paste0("https://api.genome.ucsc.edu/getData/track?genome=", genome, ";track=", track, ";maxItemsOutput=-1")
-    
     # Step 2: Make the API request to fetch the transcript data
     response <- GET(url)
     
@@ -73,3 +72,4 @@ blessy.get_transcript_track <- function(genome, track) {
     # Step 11: Return the transcript data frame
     return(bed_df)
 }
+

@@ -2,21 +2,26 @@
 % Please edit documentation in R/blessy-generate_doco_count.R
 \name{blessy.generate_doco_count}
 \alias{blessy.generate_doco_count}
-\title{Generate the DoCo Count Matrix}
+\title{Generate the DoCo Count Matrix using dict_se, count_se, and GTF file for missing genes}
 \usage{
-blessy.generate_doco_count(final_se)
+blessy.generate_doco_count(dict_se, count_se, gtf_file_path)
 }
 \arguments{
-\item{final_se}{A SummarizedExperiment object that contains transcript counts and DoCo information.}
+\item{dict_se}{A SummarizedExperiment object containing the transcript-to-DoCo mapping.}
+
+\item{count_se}{A SummarizedExperiment object containing transcript counts.}
+
+\item{gtf_file_path}{A string specifying the path to the gene annotation GTF file.}
 }
 \value{
 A data frame representing the DoCo count matrix, where each row corresponds to a unique DoCo with its aggregated read counts.
 }
 \description{
-This function aggregates the read counts of transcripts belonging to the same DoCo from a SummarizedExperiment object.
+This function aggregates the read counts of transcripts belonging to the same DoCo, using
+the DoCo information from \code{dict_se}, the transcript counts from \code{count_se}, and a GTF file for missing gene annotations.
 }
 \examples{
-# Assuming `final_se` is your SummarizedExperiment object
-#doco_count_matrix <- blessy.generate_doco_count(final_se)
+# Assuming `dict_se` and `count_se` are your SummarizedExperiment objects
+doco_count_matrix <- blessy.generate_doco_count(dict_se, count_se, "../../data/Homo_sapiens.GRCh38.111.gtf")
 head(doco_count_matrix)
 }

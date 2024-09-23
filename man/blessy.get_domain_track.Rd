@@ -19,6 +19,6 @@ This function fetches domain track data from the UCSC Genome Browser API and sav
 }
 \examples{
 # Example usage:
-blessy.get_domain_track("hg38", "unipDomain")
+domain_df <- blessy.get_domain_track("hg38", "unipDomain")
 
 }

@@ -7,20 +7,23 @@
 blessy.transcript_domain_mapping(domain_bed_file, transcript_bed_file)
 }
 \arguments{
-\item{domain_bed_file}{A string specifying the path to the domain BED file.}
+\item{domain_bed_file}{Either a string specifying the path to the domain BED file or a data frame.}
 
-\item{transcript_bed_file}{A string specifying the path to the transcript BED file.}
+\item{transcript_bed_file}{Either a string specifying the path to the transcript BED file or a data frame.}
 }
 \value{
 A \code{SummarizedExperiment} object containing the mapping of transcripts to domains. A CSV file
 with the transcript-domain mapping is saved in the \code{./out} directory as \code{transcript_domain_mapping.csv}.
 }
 \description{
-This function maps transcripts to domains by finding overlaps between transcript and domain BED files,
+This function maps transcripts to domains by finding overlaps between transcript and domain BED files or data frames,
 and saves the result as a CSV file. It also returns a \code{SummarizedExperiment} object.
 }
 \examples{
 # Example usage:
+# For file paths
 blessy.transcript_domain_mapping("./out/unipDomain_hg38_domain.bed", "./out/wgEncodeGencodeBasicV44_hg38_transcript.bed")
+# For data frames
+blessy.transcript_domain_mapping(domain_bed_df, transcript_bed_df)
 
 }
