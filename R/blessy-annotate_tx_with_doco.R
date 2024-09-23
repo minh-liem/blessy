@@ -3,6 +3,8 @@
 #' @param gr A GRanges object containing transcript IDs and domains with their genomic coordinates.
 #' @return A SummarizedExperiment object containing the DoCo for each transcript.
 #' @import dplyr
+#' @importFrom SummarizedExperiment SummarizedExperiment
+#' @importFrom S4Vectors DataFrame
 #' @examples
 #' doco_se <- blessy.annotate_tx_with_doco(gr)
 #' @export
@@ -34,5 +36,4 @@ blessy.annotate_tx_with_doco <- function(gr) {
     
     return(se)
 }
-
 

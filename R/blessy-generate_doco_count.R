@@ -5,8 +5,7 @@
 #' @param final_se A SummarizedExperiment object that contains transcript counts and DoCo information.
 #'
 #' @return A data frame representing the DoCo count matrix, where each row corresponds to a unique DoCo with its aggregated read counts.
-#' @export
-#'
+#' @import SummarizedExperiment 
 #' @examples
 #' # Assuming `final_se` is your SummarizedExperiment object
 #' #doco_count_matrix <- blessy.generate_doco_count(final_se)

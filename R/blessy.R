@@ -21,6 +21,7 @@
 #' head(results$final_dict)
 #' @export
 blessy <- function(tx_count_file_path, domain_track, transcript_track, genome) {
+
     # Step 1: Get domain track and save as a BED file
     blessy.get_domain_track(genome, domain_track)
     
@@ -54,3 +55,4 @@ blessy <- function(tx_count_file_path, domain_track, transcript_track, genome) {
     # Return the results as a list
     return(list(doco_count = doco_count, final_dict = final_dict))
 }
+

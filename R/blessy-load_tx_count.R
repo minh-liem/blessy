@@ -6,6 +6,7 @@
 #'
 #' @return A `SummarizedExperiment` object containing the transcript counts with associated transcript IDs and gene IDs.
 #' @importFrom SummarizedExperiment SummarizedExperiment
+#' @import S4Vectors
 #' @examples
 #' # Example usage:
 #' count_se <- blessy.load_transcript_counts("./data/tx_count.txt")
@@ -29,4 +30,3 @@ blessy.load_transcript_counts <- function(file_path) {
     
     return(se)
 }
-

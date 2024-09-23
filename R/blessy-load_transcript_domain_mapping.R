@@ -41,5 +41,3 @@ blessy.load_transcript_domain_mapping <- function(se) {
     return(gr)
 }
 
-
-

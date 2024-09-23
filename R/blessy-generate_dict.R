@@ -5,8 +5,8 @@
 #' @param final_se A SummarizedExperiment object that contains transcript counts and DoCo information.
 #'
 #' @return A data frame with three columns: Gene, Transcript, and DoCo.
-#' @export
-#'
+#' @importFrom SummarizedExperiment rowData
+#' @importFrom S4Vectors DataFrame
 #' @examples
 #' # Assuming `final_se` is your SummarizedExperiment object
 #' final_dict <- blessy.generate_final_dict(final_se)

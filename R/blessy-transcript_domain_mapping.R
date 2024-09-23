@@ -1,10 +1,10 @@
 #' Map Transcripts to Domains and Save Results
 #'
-#' This function maps transcripts to domains by finding overlaps between transcript and domain BED files,
+#' This function maps transcripts to domains by finding overlaps between transcript and domain BED files or data frames,
 #' and saves the result as a CSV file. It also returns a `SummarizedExperiment` object.
 #'
-#' @param domain_bed_file A string specifying the path to the domain BED file.
-#' @param transcript_bed_file A string specifying the path to the transcript BED file.
+#' @param domain_bed_file Either a string specifying the path to the domain BED file or a data frame.
+#' @param transcript_bed_file Either a string specifying the path to the transcript BED file or a data frame.
 #'
 #' @return A `SummarizedExperiment` object containing the mapping of transcripts to domains. A CSV file
 #' with the transcript-domain mapping is saved in the `./out` directory as `transcript_domain_mapping.csv`.
@@ -14,16 +14,33 @@
 #' @importFrom SummarizedExperiment SummarizedExperiment
 #' @importFrom S4Vectors DataFrame
 #' @importFrom utils write.csv
-#'
+#' @importFrom GenomeInfoDb seqlevels keepSeqlevels
 #' @examples
 #' # Example usage:
+#' # For file paths
 #' blessy.transcript_domain_mapping("./out/unipDomain_hg38_domain.bed", "./out/wgEncodeGencodeBasicV44_hg38_transcript.bed")
+#' # For data frames
+#' blessy.transcript_domain_mapping(domain_bed_df, transcript_bed_df)
 #'
 #' @export
 blessy.transcript_domain_mapping <- function(domain_bed_file, transcript_bed_file) {
-    # Step 1: Import the BED files as GRanges objects
-    domain_bed <- import(domain_bed_file, format = "BED")
-    transcript_bed <- import(transcript_bed_file, format = "BED")
+    
+    # Check if the input is a data frame or a file path
+    if (is.character(domain_bed_file)) {
+        # Import the domain BED file as GRanges object
+        domain_bed <- import(domain_bed_file, format = "BED")
+    } else {
+        # Assume it's already a data frame, convert to GRanges
+        domain_bed <- makeGRangesFromDataFrame(domain_bed_file, keep.extra.columns = TRUE)
+    }
+    
+    if (is.character(transcript_bed_file)) {
+        # Import the transcript BED file as GRanges object
+        transcript_bed <- import(transcript_bed_file, format = "BED")
+    } else {
+        # Assume it's already a data frame, convert to GRanges
+        transcript_bed <- makeGRangesFromDataFrame(transcript_bed_file, keep.extra.columns = TRUE)
+    }
     
     # Step 2: Find common sequence levels between the two BED files
     common_seqlevels <- intersect(seqlevels(transcript_bed), seqlevels(domain_bed))

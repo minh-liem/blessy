@@ -7,6 +7,7 @@
 #' @param doco_se A `SummarizedExperiment` object containing domain combination information (DoCo) for each transcript.
 #'
 #' @return A `SummarizedExperiment` object with annotated DoCo information.
+#' @import SummarizedExperiment
 #' @importFrom dplyr left_join
 #' @examples
 #' # Example usage:
@@ -49,3 +50,4 @@ blessy.annotate_doco_with_gene <- function(count_se, doco_se) {
     
     return(count_se)
 }
+

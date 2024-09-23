@@ -48,4 +48,7 @@ blessy.get_domain_track <- function(genome, track) {
     
     # Optional: Print confirmation message
     print(paste("Domain track data saved as:", output_file))
+    
+    return(bed_df)
 }
+

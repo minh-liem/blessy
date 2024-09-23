@@ -1,19 +1,19 @@
 #' Get Transcript Track Data and Save as BED File
 #'
 #' This function fetches transcript track data from the UCSC Genome Browser API and saves it as a BED file.
+#' It also returns the transcript data frame (bed_df).
 #'
 #' @param genome A string specifying the genome version (e.g., "hg38").
 #' @param track A string specifying the track name (e.g., "wgEncodeGencodeBasicV44").
 #'
-#' @return A BED file saved in the `./out` directory with the transcript track data. The function prints a message confirming the save.
+#' @return A BED file saved in the `./out` directory with the transcript track data, and the transcript data frame.
 #'
 #' @import httr
 #' @import jsonlite
 #' @importFrom dplyr select bind_rows
 #'
 #' @examples
-#' # Example usage:
-#' blessy.get_transcript_track("hg38", "wgEncodeGencodeBasicV44")
+#' tx_df <- blessy.get_transcript_track("hg38", "wgEncodeGencodeBasicV44")
 #'
 #' @export
 blessy.get_transcript_track <- function(genome, track) {
@@ -67,6 +67,9 @@ blessy.get_transcript_track <- function(genome, track) {
     output_file <- paste0("./out/", track, "_", genome, "_transcript.bed")
     write.table(bed_df, file = output_file, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
     
-    # Optional: Print confirmation message
+    # Print confirmation message
     print(paste("Transcript track data saved as:", output_file))
+    
+    # Step 11: Return the transcript data frame
+    return(bed_df)
 }
