@@ -61,7 +61,7 @@ blessy.annotate_gene <- function(doco_se, gtf_file_path) {
     write.csv(annotated_df, file = output_file, row.names = FALSE)
     
     # Print confirmation message
-    print(paste("DoCo dictionary saved to:", output_file))
+    print(paste("Partial DoCo dictionary (missing transcripts without domains) saved to:", output_file))
     
     # Return the dict_se object
     return(dict_se)
